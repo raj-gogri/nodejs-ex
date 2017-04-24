@@ -4,12 +4,14 @@ var express = require('express'),
     app     = express(),
     eps     = require('ejs'),
     morgan  = require('morgan');
+
+var publicDirectory = "views";
     
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
-app.use(express.static(__dirname));
+app.use(express.static(__dirname+ '/' + publicDirectory + '/'));
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -104,6 +106,6 @@ initDb(function(err){
 
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
-console.log('Static Dir : %s', __dirname);
+console.log('Static Dir : %s', __dirname+ '/' + publicDirectory + '/');
 
 module.exports = app ;
