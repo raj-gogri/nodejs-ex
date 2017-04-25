@@ -3455,10 +3455,9 @@
 100% { left: -400%; }
 }
 
-div#slider { overflow: hidden;}
+div#slider { overflow: hidden;height:100vh;}
 div#slider figure img { width: 20%; float: left; }
-div#slider figure { 
-  height:100vh;
+div#slider figure {
   position: relative;
   width: 500%;
   margin: 0;
