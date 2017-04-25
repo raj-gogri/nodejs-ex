@@ -5,13 +5,14 @@ var express = require('express'),
     eps     = require('ejs'),
     morgan  = require('morgan');
 
-var publicDirectory = "views";
+var staticDir = "views";
+var viewName = "future_imperfect"
     
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
-app.use(express.static(__dirname+ '/' + publicDirectory + '/'));
+app.use(express.static(__dirname+ '/' + staticDir + '/' + viewName + '/'));
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -72,10 +73,10 @@ app.get('/', function (req, res) {
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
+      res.render(viewName+'/'+'index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
-    res.render('index.html', { pageCountMessage : null});
+    res.render(viewName+'/'+'index.html', { pageCountMessage : null});
   }
 });
 
